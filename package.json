@@ -1,0 +1,11 @@
+{
+  "name": "advokat-angel-dimitrov",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Статичен сайт (HTML, CSS, JS) – генерира се в site/ от content/ и lib/",
+  "engines": { "node": ">=23.6" },
+  "scripts": {
+    "build": "node --import ./scripts/static/register.mjs scripts/build-static.mjs"
+  }
+}
