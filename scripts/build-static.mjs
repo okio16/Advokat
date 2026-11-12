@@ -19,8 +19,9 @@ const C = await import("../lib/content.ts");
 const S = await import("../lib/schema.ts");
 
 const YEAR = new Date().getFullYear();
-// Формата се изпраща през FormSubmit (formsubmit.co) – без собствен сървър.
-const FORM_ACTION = `https://formsubmit.co/${SITE.email}`;
+// Формата се изпраща към site/kontakt.php (PHP на хостинга), който праща писмото с mail()
+// и пренасочва към /blagodarya на езика на страницата. „Език“ и „Страница“ му казват накъде да върне.
+const FORM_ACTION = "/kontakt.php";
 const HERO = [1, 2, 3, 4, 5];
 
 // ---------- помощни ----------
@@ -266,9 +267,6 @@ function contactBox(lang, base) {
   </div>
   <form class="contact-form" action="${esc(FORM_ACTION)}" method="POST" data-sending="${esc(f.sending)}">
     <input type="hidden" name="_subject" value="${esc(`Запитване от сайта (${lang.toUpperCase()})`)}">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="${esc(absUrl(lp(lang, "/blagodarya")))}">
     <input type="hidden" name="Език" value="${lang.toUpperCase()}">
     <input type="hidden" name="Страница" value="${esc(absUrl(lp(lang, base)))}">
     <div class="field">
@@ -313,6 +311,72 @@ function ctaBand(lang, title) {
     <a href="#zapitvane" class="btn btn-outline">${esc(t.cta.online)}</a>
   </div>
 </div>`;
+}
+
+// Карта „Абонаментно правно обслужване“ – само на началната страница и на страниците, свързани с бизнеса.
+// На подстраниците е светла (biz-light), защото под нея идва червената лента „Нуждаете се от адвокат?“.
+const BIZ_PAGES = new Set([
+  "/uslugi",
+  "/rayoni",
+  "/uslugi/targovsko-pravo",
+  "/uslugi/targovsko-pravo/registratsiya-i-promeni-na-firmi",
+  "/uslugi/grazhdansko-pravo",
+  "/uslugi/grazhdansko-pravo/dogovorni-sporove",
+  "/uslugi/grazhdansko-pravo/sabirane-na-vzemaniya",
+  "/uslugi/trudovo-pravo",
+  "/uslugi/administrativno-pravo/danachni-sporove-i-revizii",
+  "/uslugi/potrebitelsko-pravo",
+  "/rayoni/tsentar",
+  "/rayoni/mladost",
+  "/rayoni/nadezhda",
+]);
+const BIZ = {
+  bg: {
+    eyebrow: "За фирми",
+    title: "Абонаментно правно обслужване",
+    text: "Предоставя адвокатски услуги на фирми срещу индивидуално уговорен месечен абонамент.",
+    btn: "Запитване за абонамент",
+    prefill: "Интересувам се от абонаментно правно обслужване за фирма.",
+    subject: "Запитване за абонамент (фирма)",
+  },
+  en: {
+    eyebrow: "For businesses",
+    title: "Legal services on a monthly retainer",
+    text: "Provides legal services to companies for an individually agreed monthly retainer.",
+    btn: "Ask about a retainer",
+    prefill: "I am interested in a monthly legal retainer for my company.",
+    subject: "Запитване за абонамент (фирма, EN)",
+  },
+  ru: {
+    eyebrow: "Для компаний",
+    title: "Абонентское юридическое обслуживание",
+    text: "Предоставляет адвокатские услуги компаниям за индивидуально согласованную ежемесячную абонентскую плату.",
+    btn: "Запрос об абонементе",
+    prefill: "Меня интересует абонентское юридическое обслуживание для компании.",
+    subject: "Запитване за абонамент (фирма, RU)",
+  },
+};
+
+/** Връща картата + нов ред или празен низ, ако страницата не е в BIZ_PAGES. */
+function bizCard(lang, base) {
+  const home = base === "/";
+  if (!home && !BIZ_PAGES.has(base)) return "";
+  const x = BIZ[lang];
+  return `<section id="firmi" class="biz-section${home ? "" : " biz-light"}" aria-labelledby="firmi-title">
+  <div class="biz-card" data-reveal>
+    <span class="biz-icon" aria-hidden="true"><i class="fas fa-handshake"></i></span>
+    <div class="biz-body">
+      <p class="biz-eyebrow">${esc(x.eyebrow)}</p>
+      <h2 id="firmi-title" class="biz-title">${esc(x.title)}</h2>
+      <p class="biz-text">${esc(x.text)}</p>
+    </div>
+    <div class="biz-actions">
+      <a href="#zapitvane" class="service-btn biz-btn" data-prefill="${esc(x.prefill)}" data-subject="${esc(x.subject)}">${esc(x.btn)} ${icon("fas fa-arrow-right")}</a>
+      <a href="tel:${SITE.phoneIntl}" class="biz-phone">${icon("fas fa-phone")}<span>${esc(phoneText(lang))}</span></a>
+    </div>
+  </div>
+</section>
+`;
 }
 
 const faqBlock = (items, lang) =>
@@ -426,7 +490,7 @@ function home(lang) {
 </section>
 </div>
 
-<section id="contact">
+${bizCard(lang, "/")}<section id="contact">
   <p class="center section-title" data-reveal>${esc(c.labels.contact)}</p>
   <p class="section-text" data-reveal>${esc(c.contactIntro)}</p>
   ${contactBox(lang, "/")}
@@ -448,7 +512,7 @@ function servicesPage(lang) {
     ${C.getGroups(lang).map((g) => areaCard(lang, g)).join("\n    ")}
   </div>
 </section>
-<section>
+${bizCard(lang, "/uslugi")}<section>
   ${ctaBand(lang, t.servicesPage.cta)}
   ${contactBox(lang, "/uslugi")}
 </section>`;
@@ -506,7 +570,7 @@ function serviceView(lang, category, service) {
   </div>
 </section>
 ${page.faq.length ? faqBlock(page.faq, lang) : ""}
-<section>
+${bizCard(lang, p)}<section>
   ${ctaBand(lang)}
   ${contactBox(lang, p)}
 </section>`;
@@ -551,7 +615,7 @@ function areasPage(lang) {
 <section>
   <div class="map-embed" data-reveal>${mapIframe(`${t.siteName} ${t.footer.onMap}`)}</div>
 </section>
-<section>
+${bizCard(lang, "/rayoni")}<section>
   ${ctaBand(lang)}
   ${contactBox(lang, "/rayoni")}
 </section>`;
@@ -607,7 +671,7 @@ function areaPage(lang, area) {
   </div>
 </section>
 ${faqBlock(area.faq, lang)}
-<section>
+${bizCard(lang, p)}<section>
   ${ctaBand(lang, t.areaPage.cta)}
   ${contactBox(lang, p)}
 </section>`;

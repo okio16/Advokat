@@ -213,7 +213,7 @@
       btn.querySelector("i").className = "fas fa-spinner fa-spin";
       btn.querySelector("span").textContent = form.getAttribute("data-sending");
     });
-    // При връщане назад от страницата на FormSubmit бутонът отново работи
+    // При връщане назад (след /kontakt.php → „Благодаря“) бутонът отново работи
     window.addEventListener("pageshow", function () {
       btn.disabled = false;
       btn.querySelector("i").className = "fas fa-paper-plane";

@@ -1,2 +1,6 @@
 node_modules
 *.tsbuildinfo
+# Писмата от контактната форма при тест на localhost (site/kontakt.php в DEV режим)
+mail-log/
+# Архивът за качване на хостинга се прави наново от site/
+/site.zip

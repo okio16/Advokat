@@ -31,8 +31,18 @@ npm run build    # генерира отново всички HTML страни�
 
 ## Контактна форма
 
-Формата се изпраща през FormSubmit (formsubmit.co) към имейла от `lib/site.ts`, без собствен сървър.
-Подробности има в `site/README.md`.
+Формата се изпраща към `site/kontakt.php` – малък PHP скрипт на хостинга (SuperHosting, Apache + PHP 7.4+),
+който праща писмото с `mail()` до adv.angeldimitrov@abv.bg и пренасочва към `/blagodarya` (`/en/…`, `/ru/…`).
+Адресът на формата (`action="/kontakt.php"`) се задава в `scripts/build-static.mjs`. Получателят и подателят са най-горе в `kontakt.php`.
+Подробности и тест на localhost има в `site/README.md`.
+
+Тест на localhost (PHP не чете `.htaccess`, затова има отделен router):
+
+```bash
+php -S localhost:8000 -t site scripts/dev-router.php
+```
+
+На localhost писмата не се пращат, а се записват в `mail-log/` в корена на проекта (папката е в `.gitignore`).
 
 ## Структура (на всеки език)
 
