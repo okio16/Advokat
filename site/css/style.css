@@ -1982,3 +1982,189 @@ summary,
     background: #fff;
   }
 }
+
+/* ---------- Абонамент за фирми ---------- */
+/* Съседните секции дават отстоянието; на началната страница картата идва след цветната лента */
+.biz-section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.services-band + .biz-section {
+  padding-top: 3.5rem;
+}
+
+.biz-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 2.25rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-darker));
+  color: var(--text-light);
+  border-radius: 16px;
+  box-shadow: var(--shadow-hover);
+}
+
+.biz-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid var(--brass-light);
+  color: var(--brass-light);
+  font-size: 1.9rem;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.biz-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin-bottom: 0.3rem;
+}
+
+.biz-title {
+  font-family: var(--font-head);
+  font-size: 1.45rem;
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.biz-text {
+  color: var(--on-primary-muted);
+  margin: 0;
+}
+
+.biz-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.6rem;
+}
+
+.biz-btn {
+  gap: 0.55rem;
+  background: #ffffff;
+  color: var(--primary-color);
+  white-space: nowrap;
+}
+
+.biz-btn i {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.biz-phone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.biz-phone span {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-underline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .biz-btn:hover {
+    background: var(--primary-tint);
+  }
+
+  .biz-btn:hover i {
+    transform: translateX(4px);
+  }
+
+  .biz-card:hover .biz-icon {
+    transform: rotate(-8deg) scale(1.06);
+  }
+
+  .biz-phone:hover span {
+    text-decoration-color: #ffffff;
+  }
+}
+
+/* Светъл вариант за подстраниците, където отдолу следва червената лента „Нуждаете се от адвокат?“ */
+.biz-light .biz-card {
+  background: var(--surface);
+  color: var(--text-dark);
+  border: 1px solid var(--primary-line);
+  border-left: 4px solid var(--primary-color);
+  box-shadow: var(--shadow);
+}
+
+.biz-light .biz-icon {
+  background: var(--primary-tint);
+  border-color: var(--brass);
+  color: var(--primary-color);
+}
+
+.biz-light .biz-eyebrow {
+  color: var(--primary-color);
+}
+
+.biz-light .biz-title {
+  color: var(--text-dark);
+}
+
+.biz-light .biz-text {
+  color: var(--text-muted);
+}
+
+.biz-light .biz-btn {
+  background: var(--primary-color);
+  color: #ffffff;
+}
+
+.biz-light .biz-phone {
+  color: var(--primary-color);
+}
+
+.biz-light .biz-phone span {
+  text-decoration-color: rgba(122, 13, 13, 0.35);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .biz-light .biz-btn:hover {
+    background: var(--primary-dark);
+  }
+
+  .biz-light .biz-phone:hover span {
+    text-decoration-color: var(--primary-color);
+  }
+}
+
+@media (max-width: 760px) {
+  .biz-light .biz-card {
+    border-left: 1px solid var(--primary-line);
+    border-top: 4px solid var(--primary-color);
+  }
+
+  .biz-card {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: 1.1rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .biz-actions {
+    width: 100%;
+  }
+
+  .biz-btn {
+    white-space: normal;
+  }
+}

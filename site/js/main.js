@@ -221,6 +221,18 @@
     });
   });
 
+  // Бутон „Запитване за абонамент“: попълва формата, ако посетителят още не е писал нищо
+  document.querySelectorAll("[data-prefill]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      var form = document.querySelector(".contact-form");
+      if (!form) return;
+      var box = form.querySelector("textarea[name=message]");
+      if (box && !box.value.trim()) box.value = link.getAttribute("data-prefill");
+      var subject = form.querySelector("input[name=_subject]");
+      if (subject && link.hasAttribute("data-subject")) subject.value = link.getAttribute("data-subject");
+    });
+  });
+
   // Годината във футъра
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
