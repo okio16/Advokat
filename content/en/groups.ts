@@ -25,7 +25,7 @@ const T: Pick<Group, "title" | "text">[] = [
   },
   {
     title: "Contract and commercial law",
-    text: "When you sign a contract, someone does not pay you, you buy or rent property, claim compensation after a road accident or register a company.",
+    text: "When you sign a contract, someone does not pay you, you buy or rent property or register a company.",
   },
 ];
 

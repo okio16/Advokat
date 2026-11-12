@@ -6,7 +6,7 @@ export const SITE = {
   person: "Ангел Тодоров Димитров",
   primaryCategory: "Адвокат",
   city: "София",
-  phone: "088 399 6666",
+  phone: "+359 88 399 6666",
   phoneIntl: "+359883996666",
   phoneDisplayIntl: "+359 88 399 6666",
   email: "adv.angeldimitrov@abv.bg",

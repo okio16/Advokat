@@ -11,7 +11,7 @@ export const COPY = {
     brand: "Адвокат Ангел Димитров",
     h1Name: "Адвокат Ангел Димитров",
     h1Rest: "Наказателни, административни, административно­наказателни и граждански дела в София",
-    heroLead: "Кантора в ж.к. Надежда 2. Поемам дела и в цялата страна.",
+    heroLead: "Кантора в ж.к. Надежда. Поемам дела и в цялата страна.",
     situationsLabel: "Започнете оттук, ако:",
     situations: [
       { label: "близък човек е задържан", href: N },
@@ -38,7 +38,7 @@ export const COPY = {
     brand: "Lawyer Angel Dimitrov",
     h1Name: "Lawyer Angel Dimitrov",
     h1Rest: "Criminal, administrative, family and civil cases in Sofia",
-    heroLead: "Office in Nadezhda 2, Sofia. I also take cases throughout Bulgaria.",
+    heroLead: "Office in Nadezhda, Sofia. I also take cases throughout Bulgaria.",
     situationsLabel: "Start here if:",
     situations: [
       { label: "someone close to you has been detained", href: N },
@@ -65,7 +65,7 @@ export const COPY = {
     brand: "Адвокат Ангел Димитров",
     h1Name: "Адвокат Ангел Димитров",
     h1Rest: "Уголовные, административные, семейные и гражданские дела в Софии",
-    heroLead: "Контора в ж.к. Надежда 2, София. Веду дела и по всей Болгарии.",
+    heroLead: "Контора в ж.к. Надежда, София. Веду дела и по всей Болгарии.",
     situationsLabel: "Начните отсюда, если:",
     situations: [
       { label: "задержан близкий человек", href: N },

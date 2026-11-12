@@ -7,7 +7,7 @@ import { AREA_DATA, type AreaData } from "./areas-data";
 const TPL: Record<Locale, (a: AreaData) => Omit<Area, "slug" | "name" | "areas" | "services">> = {
   bg: (a) => ({
     title: `${a.h1.bg} – ${a.places.bg} | Адвокат Ангел Димитров`,
-    description: `${a.h1.bg}: ${a.places.bg}. Наказателни, административни, граждански, семейни и трудови дела. Кантора в ж.к. Надежда 2. ☎ 088 399 6666`,
+    description: `${a.h1.bg}: ${a.places.bg}. Наказателни, административни, граждански, семейни и трудови дела. Кантора в ж.к. Надежда 2. ☎ +359 88 399 6666`,
     h1: a.h1.bg,
     lead: a.lead.bg,
     sections: [
@@ -16,7 +16,7 @@ const TPL: Record<Locale, (a: AreaData) => Omit<Area, "slug" | "name" | "areas" 
         blocks: [
           a.intro.bg,
           `Адресът е ж.к. Надежда 2, ул. „Стражица“ 7, ет. 2, офис 10. ${a.reach.bg}`,
-          "Обадете се предварително на **088 399 6666**, за да уговорим удобен час.",
+          "Обадете се предварително на **+359 88 399 6666**, за да уговорим удобен час.",
         ],
       },
       {

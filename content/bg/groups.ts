@@ -80,7 +80,7 @@ export const GROUPS: Group[] = [
     title: "Договорно и търговско право",
     icon: "fa fa-building",
     href: "/uslugi/grazhdansko-pravo",
-    text: "Когато подписвате договор, някой не Ви плаща, купувате или наемате имот, искате обезщетение след ПТП или регистрирате фирма.",
+    text: "Когато подписвате договор, някой не Ви плаща, купувате или наемате имот\nили регистрирате фирма.",
     buttons: [
       { label: "Договорно право", href: "/uslugi/grazhdansko-pravo" },
       { label: "Търговско право", href: "/uslugi/targovsko-pravo" },

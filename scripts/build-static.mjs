@@ -28,7 +28,7 @@ const HERO = [1, 2, 3, 4, 5];
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const icon = (cls) => `<i class="${cls}" aria-hidden="true"></i>`;
-const phoneText = (lang) => (lang === "bg" ? SITE.phone : SITE.phoneDisplayIntl);
+const phoneText = () => SITE.phoneDisplayIntl;
 const href = (lang, p) => esc(lp(lang, p));
 const ucfirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -100,7 +100,7 @@ function areaCard(lang, g) {
   });
   return `<div class="service" data-stagger>
       <h2>${icon(g.icon)}<span>${esc(g.title)}</span></h2>
-      <p>${esc(g.text)}</p>
+      <p>${esc(g.text).replace(/\n/g, "<br>")}</p>
       <div class="service-buttons">${main.map((s) => `<h3><a href="${href(lang, s.path)}" class="service-btn">${esc(s.name)}</a></h3>`).join("")}</div>
     </div>`;
 }
